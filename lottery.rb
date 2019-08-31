@@ -11,16 +11,16 @@ def game
   end
 end
 
-def rnd_comment(money)
+def rnd_comment(money,m_money)
   comment = rand (1..4)
   if comment == 1
-    puts "Повезёт в другой раз, списываю 5$.Осталось #{money}$."
+    puts "Повезёт в другой раз, списываю #{m_money}$.Осталось #{money}$."
     elsif comment == 2
-      puts "Не расстраивайся! 5$ не так уж много.Осталось #{money}$."
+      puts "Не расстраивайся! #{m_money}$ не так уж много.Осталось #{money}$."
     elsif comment == 3
-      puts "Взял у тебя 5$. Сегодня остаешься без ужина.Осталось #{money}$."
+      puts "Взял у тебя #{m_money}$. Сегодня остаешься без ужина.Осталось #{money}$."
     else
-      puts "Минус 5$. Эти деньги пойдут на благотворительность!.Осталось #{money}.$"
+      puts "Минус #{m_money}$. Эти деньги пойдут на благотворительность!.Осталось #{money}.$"
   end
 end
 
@@ -65,8 +65,9 @@ def game2
                 end
               end
           else
-            money-=5
-            rnd_comment(money)
+            m_money= rand(1..5)
+            money-=m_money
+            rnd_comment(money,m_money)
           end
       end
   end
