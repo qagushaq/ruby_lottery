@@ -1,3 +1,21 @@
+def ygadaika
+  try=10
+  n=50
+  number = rand(1..n)
+  1.upto(try) do |i|
+    print "Я загадал число от 1 до #{n}, угадай какое. Попытка #{i}, Осталось попыток #{try+1-i}:"
+    x = gets.chomp.strip.to_i
+    if x == number
+      puts "Ты угадал, число #{number}"
+      break
+    elsif x < number
+      puts "Нет,больше "
+    elsif x > number
+      puts "Нет,меньше"
+    end
+  end
+end
+
 def game
   puts "Сколько раз будем играть ?"
   count = gets.chomp.strip.to_i
@@ -74,7 +92,7 @@ def game2
 end
 
 def choose_game
-  puts "Лотерея-1, однорукий-бандит - 2"
+  puts "Лотерея-1, однорукий-бандит - 2, угадайка - 3"
   choose = gets.chomp.strip.capitalize
   if choose == "1"
     game
@@ -82,6 +100,9 @@ def choose_game
   if choose == "2"
     game2
   end
+  if choose == "3"
+    ygadaika
+  end  
 end
 
 def check_confirm
