@@ -23,7 +23,7 @@ def checker_limit_number(input,max_number)
 	else
 		return true
 	end
-end#обернуть все в вайл тру и выскакивать к нему, когда 5>4
+end
 
 def game1(money)#добавить проверку на достаточное кол-во денег
 print "Цена одного билета 2$ у вас #{money}$.Сколько раз будем играть:"
@@ -42,8 +42,6 @@ count_of_ticket = gets.chomp.strip.to_i
   end
 	return money
 end
-
-
 
 def game2(money)
   while true do
@@ -132,9 +130,6 @@ def game4(money)
 		while money>=1
 			puts "1-камень, 2-ножницы,3-бумага"
 			cmd=gets.chomp.strip.to_i
-
-			#break if cmd>3
-			##########
 			user=arr[cmd-1]
 			bot = rsc_bot
 			puts "Вы выбрали #{user}"
@@ -160,7 +155,7 @@ def game4(money)
 				money-=1
 				puts "You lose. Ножницы разрезали бумагу. Ваш баланс:#{money}"
 			end
-			break if checker_limit_number(cmd,3) == false###
+			break if checker_limit_number(cmd,3) == false
 		end
 	end
 	return money
