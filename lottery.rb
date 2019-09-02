@@ -1,3 +1,4 @@
+#сделать чтобы по стопу вылетало в выбор
 def rsc_bot
 [:камень,:ножницы,:бумагу][rand(0..2)]
 end
@@ -13,7 +14,7 @@ def rnd_comment(money,m_money)
     elsif comment == 4
       puts "#{m_money}$ - ТЕПЕРЬ МОИ! Студент? Ну не плачь, всего неделю поголодаешь.Осталось #{money}$."
     else
-      puts "Минус #{m_money}$. Эти деньги пойдут на благотворительность!.Осталось #{money}.$"
+      puts "Минус #{m_money}$. Эти деньги пойдут на благотворительность!.Осталось #{money}$."
   end
 end
 
@@ -188,7 +189,7 @@ end
 def check_confirm
   puts "Хотите сыграть ?"
   confirm = gets.chomp.strip.capitalize
-  if confirm == "Y" || confirm == "Д"
+  if confirm[0] == "Y" || confirm == "Д"
     puts "Сколько денег мне принесли ?"
     money=gets.chomp.strip.to_i
     choose_game(money)
