@@ -1,4 +1,12 @@
 #сделать чтобы по стопу вылетало в выбор
+#передовать money во все игры
+#добавить в начало проверку  переданных money >2
+#добавить stop
+#проверить выбираемые цифры в чекере, работают ли
+#game4 - убрать "Вы выбрали _____" если введена цифра больше 3
+#вместо свитч кейсов засунуть вызовы процедур в лямбды мб
+#когда буду сунуть в модули сделать моней @@money чтобы были видны везде в классах
+#засунуть в вызов игр method_missing из 17 урока
 def rsc_bot
 [:камень,:ножницы,:бумагу][rand(0..2)]
 end
@@ -6,15 +14,15 @@ end
 def rnd_comment(money,m_money)
   comment = rand (1..5)
   if comment == 1
-    puts "Повезёт в другой раз, списываю #{m_money}$.Осталось #{money}$."
-    elsif comment == 2
-      puts "Не расстраивайся! #{m_money}$ не так уж много.Осталось #{money}$."
-    elsif comment == 3
-      puts "Взял у тебя #{m_money}$. Сегодня остаешься без ужина.Осталось #{money}$."
-    elsif comment == 4
-      puts "#{m_money}$ - ТЕПЕРЬ МОИ! Студент? Ну не плачь, всего неделю поголодаешь.Осталось #{money}$."
-    else
-      puts "Минус #{m_money}$. Эти деньги пойдут на благотворительность!.Осталось #{money}$."
+  puts "Повезёт в другой раз, списываю #{m_money}$.Осталось #{money}$."
+  elsif comment == 2
+    puts "Не расстраивайся! #{m_money}$ не так уж много.Осталось #{money}$."
+  elsif comment == 3
+    puts "Взял у тебя #{m_money}$. Сегодня остаешься без ужина.Осталось #{money}$."
+  elsif comment == 4
+    puts "#{m_money}$ - ТЕПЕРЬ МОИ! Студент? Ну не плачь, всего неделю поголодаешь.Осталось #{money}$."
+  else
+    puts "Минус #{m_money}$. Эти деньги пойдут на благотворительность!.Осталось #{money}$."
   end
 end
 
@@ -31,7 +39,7 @@ print "Цена одного билета 2$ у вас #{money}$.Сколько 
 count_of_ticket = gets.chomp.strip.to_i
   money-=count_of_ticket*2
   puts "Куплено #{count_of_ticket} билетов, у вас осталось #{money}$"
-  print "Сколько будет билетов:"
+  print 'Сколько будет билетов:'
   count_all_ticket = gets.chomp.strip.to_i
 	prize = count_all_ticket/3
   1.upto(count_of_ticket) do |i|
@@ -44,50 +52,50 @@ count_of_ticket = gets.chomp.strip.to_i
 	return money
 end
 
-def game2(money)
+def game2(money)#ДОБАВИТЬ STOP
   while true do
-     puts "Жми enter, чтобы испытать удачу!"
+    puts 'Жми enter, чтобы испытать удачу!'
     gets
     x=rand(0..9)
     y=rand(0..9)
     z=rand(0..9)
       if money<=0
-        puts "Вы банкрот:(\nСпасибо за игру:)"
-        exit
-        else
-          if x == y && x == z && x > 0 && x != 5
-            puts " Вам выпало #{x}-#{y}-#{z} Вам зачислено #{x*10}$"
-            money = money + x*10
-            elsif x == 0 &&  y == 0 &&  z == 0
-                puts "Вам выпало #{x}-#{y}-#{z} Вы все проиграли"
-                money*=0
-                puts "Осталось #{money}$"
-            elsif x == y && x == z && x == 6
-              puts "Jackpot!!! Ваш счёт удваивается!"
-              money*=2
-            elsif x == y || y == z
-              puts "Парное совпадение! Вам зачислено 2$"
-              money+=2
+      puts "Вы банкрот:(\nСпасибо за игру:)"
+      exit
+      else
+        if x == y && x == z && x > 0 && x != 5
+          puts " Вам выпало #{x}-#{y}-#{z} Вам зачислено #{x*10}$"
+          money = money + x*10
+        elsif x == 0 &&  y == 0 &&  z == 0
+          puts "Вам выпало #{x}-#{y}-#{z} Вы все проиграли"
+          money*=0
+          puts "Осталось #{money}$"
+        elsif x == y && x == z && x == 6
+          puts "Jackpot!!! Ваш счёт удваивается!"
+          money*=2
+        elsif x == y || y == z
+          puts "Парное совпадение! Вам зачислено 2$"
+          money+=2
+          puts "Осталось #{money}$"
+            1.upto(5) do |i|
+            if x == y &&  x == z &&  z == i
+              puts "Вам выпало #{x}-#{y}-#{z} Вам зачислено #{i*10}$"
+              money+=50
               puts "Осталось #{money}$"
-                1.upto(5) do |i|
-                if x == y &&  x == z &&  z == i
-                  puts "Вам выпало #{x}-#{y}-#{z} Вам зачислено #{i*10}$"
-                  money+=50
-                  puts "Осталось #{money}$"
-                end
-              end
-              7.upto(9) do |i|
-                if  x == y &&  x == z &&  z == i
-                  puts "Вам выпало #{x}-#{y}-#{z} Вы проиграли #{i*10}$"
-                  money-=50
-                  puts "Осталось #{money}$"
-                end
-              end
-          else
-            m_money= rand(1..5)
-            money-=m_money
-            rnd_comment(money,m_money)
+            end
+        end
+          7.upto(9) do |i|
+            if  x == y &&  x == z &&  z == i
+              puts "Вам выпало #{x}-#{y}-#{z} Вы проиграли #{i*10}$"
+              money-=50
+              puts "Осталось #{money}$"
+            end
           end
+        else
+          m_money= rand(1..5)
+          money-=m_money
+          rnd_comment(money,m_money)
+        end
       end
   end
 	return money
@@ -97,17 +105,18 @@ def game3(money)
   print "Привет! Загадываю число от 1 до "
   n=gets.chomp.strip.to_i
   if  n<=50
-      price = 10
+    price = 10
   elsif n>51 && n<=100	#придумать динамический алгоритм,чтобы вычислять стоимость игры
     price = 11 # исходя из 1..n по кол-ву попыток для ответа 50-5 100-7 +-
   end
+  prize=n/2
   puts "Цена одной попытки #{price}$. Удачи!"
   number = rand(1..n)
 	1.upto(n) do |i|
     puts "Я загадал число от 1 до #{n}, угадай какое. Попытка #{i}:"
     x = gets.chomp.strip.to_i
     if x == number
-			money+=50
+			money+=prize
       puts "Ты угадал, число #{number}. Твой баланс:#{money}"
       break
     elsif x < number
@@ -122,15 +131,16 @@ def game3(money)
 	return money
 end
 
-def game4(money)
+def game4(money)#добавить STOP можно вынести win/lose в методы
 	if money<=0
 		puts "Вы банкрот:(\nСпасибо за игру:)"
 		exit
-		else
+	else
 		arr = [:камень,:ножницы,:бумагу]
 		while money>=1
 			puts "1-камень, 2-ножницы,3-бумага"
 			cmd=gets.chomp.strip.to_i
+      break if checker_limit_number(cmd,3) == false
 			user=arr[cmd-1]
 			bot = rsc_bot
 			puts "Вы выбрали #{user}"
@@ -155,31 +165,30 @@ def game4(money)
 			elsif user ==:бумагу && bot==:ножницы
 				money-=1
 				puts "You lose. Ножницы разрезали бумагу. Ваш баланс:#{money}"
-			end
-			break if checker_limit_number(cmd,3) == false
+      end
 		end
 	end
 	return money
 end
 
 def choose_game(money)
+  arr = ["Лотерея","Однорукий-бандит","Угадай число","Камень Ножницы Бумага"]
 	while true do
 	  puts "Во что будем играть ?"
-	  puts "Лотерея-1"#сделать все цифры на одном уровне
-	  puts "Однорукий-бандит - 2"
-	  puts "Угадай число - 3"
-	  puts "Камень Ножницы Бумага - 4"
-	  choose = gets.chomp.strip.capitalize
-	  if choose == "1"
+    arr.each_with_index do |game_name,index|
+      puts "#{index+1}. #{game_name}"
+    end
+	  choose = gets.chomp.strip.to_i
+	  if choose == 1
 	    game1(money)
 	  end
-	  if choose == "2"
+	  if choose == 2
 	    game2(money)
 	  end
-	  if choose == "3"
+	  if choose == 3
 	    game3(money)
 	  end
-	  if choose =="4"
+	  if choose == 4
 	    game4(money)
 		end
 		break if checker_limit_number(choose,4) == false
@@ -190,15 +199,15 @@ def check_confirm
   puts "Хотите сыграть ?"
   confirm = gets.chomp.strip.capitalize
   if confirm[0] == "Y" || confirm == "Д"
-    puts "Сколько денег мне принесли ?"
+    puts 'Сколько денег мне принесли ?'
     money=gets.chomp.strip.to_i
     choose_game(money)
   else
-    puts "Ну и уходите!"
+    puts 'Ну и уходите!'
   end
 end
 
-puts "Сколько вам лет ?"
+puts 'Сколько вам лет ?'
 age = gets.chomp.strip.to_i
 if age>=18
   check_confirm
